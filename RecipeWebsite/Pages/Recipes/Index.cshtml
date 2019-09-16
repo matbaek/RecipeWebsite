@@ -1,0 +1,42 @@
+﻿@page
+@model RecipeWebsite.Pages.Recipes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead style="background-color: orange;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].Ratings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@{int count = 0;
+string style = "background-color: #f2f2f2;";}
+@foreach (var item in Model.Recipe) {
+        <tr style="@style">
+            <td>
+                @Html.DisplayFor(modelItem => item.finalRatingScore)/5
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+        </tr>
+        if(count == 0)
+        {
+            count++;
+            style = "";
+        } else
+        {
+            count = 0;
+            style = "background-color: #f2f2f2;";
+        }
+}
+    </tbody>
+</table>
